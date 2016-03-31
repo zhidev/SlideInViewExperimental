@@ -73,7 +73,6 @@ class CustomView: UIView {
             
             UIView.animateWithDuration(0.25, animations: { () -> Void in
                 self.imageContent.center = point
-                print("Changed")
             })
         }else if panGestureRecognizer.state == UIGestureRecognizerState.Ended{
             print("Ended")

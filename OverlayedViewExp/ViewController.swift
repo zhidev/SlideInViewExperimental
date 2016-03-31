@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     var customViewWhenOpen: CGRect!
     var customViewWhenClosed: CGRect!
     var trueForOpenFalseForClosed = false
+    var xtranslation: CGFloat!
+    
     
     
     var testView: CustomView!
@@ -30,6 +32,7 @@ class ViewController: UIViewController {
         
         customViewWhenOpen = CGRectMake(0, 0, self.view.frame.size.width/2.5, self.view.frame.size.height)
         customViewWhenClosed = CGRectMake(-self.view.frame.size.width/2.5 + 15, 0, self.view.frame.size.width/2.5, self.view.frame.size.height)
+        xtranslation = -self.view.frame.size.width/2.5 + 15
         
         testView = CustomView(frame: customViewWhenClosed)
         testView.imageContent.image = UIImage(named: "gradient")
@@ -52,13 +55,15 @@ class ViewController: UIViewController {
 
     func tappedCustomView(sender: UITapGestureRecognizer) {
         print(" TAP TAP REV")
-        UIView.animateWithDuration(2) { () -> Void in
+        UIView.animateWithDuration(1.2) { () -> Void in
             //self.testView.center = CGPoint(x: self.testView.center.x + 200, y: self.testView.center.y+300)
-            if( self.trueForOpenFalseForClosed){
-                self.testView.frame = self.customViewWhenClosed
+            if( self.trueForOpenFalseForClosed){ // currentlyOpen
+                self.testView.transform = CGAffineTransformMakeTranslation(0, 0)
+                //self.testView.frame = self.customViewWhenClosed
                 self.trueForOpenFalseForClosed = false
-            }else{
-                self.testView.frame = self.customViewWhenOpen
+            }else{ //CurrentlyClosed
+                self.testView.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width/2.5 - 15, 0)
+                //self.testView.frame = self.customViewWhenOpen
                 self.trueForOpenFalseForClosed = true
             }
         }
